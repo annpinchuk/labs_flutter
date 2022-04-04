@@ -1,65 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:lab1/widgets/lab7.dart';
+import 'package:lab1/group.dart';
+import 'package:lab1/student.dart';
 
 void main() {
-  runApp(const MyApp());
+  Student student1 = Student(name: 'Анна', surname: 'Пінчук', age: 20);
+  Student student2 = Student(name: 'Олександр', surname: 'Олександров', age: 21);
+  Student student3 = Student(name: 'Руслана', surname: 'Петя', age: 22);
+
+  print(student1.toString());
+
+  Group group = Group(name: 'ТІ-81');
+
+  group.addStudent(student1);
+  group.addStudent(student2);
+  group.addStudent(student3);
+
+  print(group.toString());
+
+  group.printStudentsList();
+
+  student3.publicMethod();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Lab 7',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  'Лабораторна робота №7',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
-                Text(
-                  'Пінчук Анни, ТІ-81',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Lab7(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
