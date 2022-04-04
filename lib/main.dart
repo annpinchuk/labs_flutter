@@ -1,9 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lab1/widgets/exercise_1.dart';
-import 'package:lab1/widgets/exercise_2.dart';
 import 'package:lab1/widgets/lab7.dart';
 
 void main() {
