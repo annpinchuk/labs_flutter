@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lab1/widgets/exercise_1.dart';
-import 'package:lab1/widgets/exercise_2.dart';
-import 'package:lab1/widgets/lab7.dart';
+import 'package:lab1/widgets/task1.dart';
+import 'package:lab1/widgets/task2.dart';
+import 'package:lab1/widgets/task3.dart';
+import 'package:lab1/widgets/task4.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lab 7',
+      title: 'Lab 12',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -45,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 Text(
-                  'Лабораторна робота №7',
+                  'Лабораторна робота №12',
                   style: TextStyle(
                     fontSize: 25,
                   ),
@@ -59,7 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: 25,
                 ),
-                Lab7(),
+                Task1(),
+                Task2(),
+                Task3(),
+                Task4(),
               ],
             ),
           ),
