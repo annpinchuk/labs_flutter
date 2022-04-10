@@ -15,7 +15,6 @@ class Tasks {
   // цифрою від 0 до 9;
   // малою латинською літерою;
   // латинською літерою (великою чи малою)
-
   String? task1(String? value) {
     RegExp regexSmallLatin = RegExp('[a-z]');
     RegExp regexBiglLatin = RegExp('[A-Z]');
@@ -68,12 +67,24 @@ class Tasks {
     }
   }
 
-  // Завдання 4
+  String result = '';
+
+  // Завдання 5
   // Написати процедуру обчислення за цілим N>3 таких натуральних A і B,
   // що 5A-2B=N, причому A+B мінімально.
   task5(int n) {
-
+    if (n > 3) {
+      for (int i = 0; i * 5 <= n; i++) {
+        if ((n - (i * (-2))) % (-2) == 0) {
+          result = "A =  $i  B = ${(n - (i * 5)) / (-2)} ";
+          return;
+        }
+      }
+      result = "Рішення немає";
+      return;
+    } else {
+      result = "N<3";
+      return;
+    }
   }
-
-
 }

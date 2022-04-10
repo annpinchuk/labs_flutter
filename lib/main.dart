@@ -3,6 +3,7 @@ import 'package:lab1/widgets/task1.dart';
 import 'package:lab1/widgets/task2.dart';
 import 'package:lab1/widgets/task3.dart';
 import 'package:lab1/widgets/task4.dart';
+import 'package:lab1/widgets/task5.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Task2(),
                 Task3(),
                 Task4(),
+                Task5(),
               ],
             ),
           ),
