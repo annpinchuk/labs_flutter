@@ -18,6 +18,7 @@ void main() {
 
   group.printStudentsList();
 
+  //Завдання 4
   student3.publicMethod();
 }
 
