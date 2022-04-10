@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lab1/tasks.dart';
 
 class Task2 extends StatefulWidget {
@@ -10,17 +9,18 @@ class Task2 extends StatefulWidget {
 }
 
 class _Task2State extends State<Task2> {
+  final _formKey = GlobalKey<FormState>();
 
   //ініціалізуємо контролери для текстових полів
   TextEditingController task2Controller = TextEditingController();
 
   Tasks tasks = Tasks();
 
-  String? task2Result;
+  int task2Result = 0;
 
   setTask2Result() {
     setState(() {
-      task2Result = tasks.task2(int.parse(task2Controller.text));
+      task2Result = tasks.task2(task2Controller.text);
     });
   }
 
@@ -36,56 +36,51 @@ class _Task2State extends State<Task2> {
           ),
         ),
         Text(
-          'Введіть цифру від 1 до 7:',
+          'Введіть стрічку для перевірки кількості чисел:',
           style: TextStyle(
             fontSize: 15,
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
-        SizedBox(
-          width: 100,
-          height: 50,
-          child: TextFormField(
-            controller: task2Controller,
-            autocorrect: false,
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-            ],
-            cursorColor: Color(0xff181B19),
-            style: TextStyle(
-              color: Color(0xff181B19),
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              isDense: true,
-              fillColor: Color(0xffD6E0FB),
-              contentPadding: EdgeInsets.all(15),
-              hintText: 'n',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
+        Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: TextFormField(
+              controller: task2Controller,
+              autocorrect: false,
+              cursorColor: const Color(0xff181B19),
+              style: TextStyle(
+                color: Color(0xff181B19),
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                hintText: 'str',
+                hintStyle: const TextStyle(
+                  color: Color(0xFFA5A5A5),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+                filled: true,
+                fillColor: const Color(0xffF2F3F2),
+                contentPadding: EdgeInsets.only(top: 30, left: 20, right: 20),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
                 ),
               ),
             ),
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
         ElevatedButton(
           onPressed: setTask2Result,
-          child: const Text('Отримати день тижня'),
+          child: const Text('Перевірити'),
         ),
-        // CalculationButton(onTap: setTask2Result),
         SizedBox(
-          height: 15,
+          height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

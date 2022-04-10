@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lab1/tasks.dart';
 
 class Task5 extends StatefulWidget {
@@ -10,10 +9,20 @@ class Task5 extends StatefulWidget {
 }
 
 class _Task5State extends State<Task5> {
+  final _formKey = GlobalKey<FormState>();
+
   //ініціалізуємо контролери для текстових полів
-  TextEditingController nController = TextEditingController();
+  TextEditingController task5Controller = TextEditingController();
 
   Tasks tasks = Tasks();
+
+  String task5Result = '';
+
+  setTask3Result() {
+    setState(() {
+      task5Result = tasks.task5(task5Controller.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,66 +36,51 @@ class _Task5State extends State<Task5> {
           ),
         ),
         Text(
-          'Введіть N>3 для подальших обчислень:',
+          'Введіть стрічку:',
           style: TextStyle(
             fontSize: 15,
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
-        SizedBox(
-          width: 100,
-          height: 50,
-          child: TextFormField(
-            controller: nController,
-            autocorrect: false,
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-            ],
-            cursorColor: Color(0xff181B19),
-            style: TextStyle(
-              color: Color(0xff181B19),
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              isDense: true,
-              fillColor: Color(0xffD6E0FB),
-              contentPadding: EdgeInsets.all(15),
-              hintText: 'N',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
+        Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: TextFormField(
+              controller: task5Controller,
+              autocorrect: false,
+              cursorColor: const Color(0xff181B19),
+              style: TextStyle(
+                color: Color(0xff181B19),
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                hintText: 'str',
+                hintStyle: const TextStyle(
+                  color: Color(0xFFA5A5A5),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+                filled: true,
+                fillColor: const Color(0xffF2F3F2),
+                contentPadding: EdgeInsets.only(top: 30, left: 20, right: 20),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
                 ),
               ),
             ),
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  tasks.task5(
-                    int.parse(nController.text),
-                  );
-                });
-              },
-              child: const Text('Обчислити'),
-            ),
-          ],
+        ElevatedButton(
+          onPressed: setTask3Result,
+          child: const Text('Перевірити'),
         ),
         SizedBox(
-          height: 15,
+          height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -98,29 +92,23 @@ class _Task5State extends State<Task5> {
               ),
             ),
             Container(
-              width: 200,
+              width: 150,
               decoration: BoxDecoration(
                 color: Color(0xffD6E0FB),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
+                  vertical: 10,
+                  horizontal: 5,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 10,
-                  ),
-                  child: Text(tasks.result),
-                ),
+                child: Text(task5Result),
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 25,
+          height: 20,
         ),
       ],
     );

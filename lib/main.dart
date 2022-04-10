@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lab 12',
+      title: 'HW 12',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 Text(
-                  'Лабораторна робота №12',
+                  'Домашнє завдання №12',
                   style: TextStyle(
                     fontSize: 25,
                   ),

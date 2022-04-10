@@ -1,90 +1,46 @@
-enum Weekd {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday,
-}
-
 class Tasks {
   // Завдання 1
-  //Написати программу, що робить перевірку, чи є значення символьної змінної,
-  // що введена з клавіатури:
-  // цифрою від 0 до 9;
-  // малою латинською літерою;
-  // латинською літерою (великою чи малою)
-  String? task1(String? value) {
-    RegExp regexSmallLatin = RegExp('[a-z]');
-    RegExp regexBiglLatin = RegExp('[A-Z]');
-    RegExp regexNumber = RegExp('[0-9]');
-    if (value == null || value.isEmpty) {
-      return 'Введіть символ';
-    } else if (regexSmallLatin.hasMatch(value)) {
-      return 'Введене значення є малою латинською літерою';
-    } else if (regexBiglLatin.hasMatch(value)) {
-      return 'Введене значення є великою латинською літерою';
-    } else if (regexNumber.hasMatch(value)) {
-      return 'Введене значення є цифрою';
+  //Написати програму, що зчитує з клавіатури стрічку і повертає кількість слів
+  // (в слові можуть зустрічатися: тільки літери; тільки
+  // символи;літери+символи+цифри;літери+символи; літери+цифри; символи(окрім
+  // крапки та коми)+цифри;якщо відділені пропусками символи цифри, або цифри
+  // та кома чи крапка, то даний ланцюжок є числом)
+  task1(String str) {
+    int numberCount = 0;
+    List<String> allWords = str.split(RegExp('\\s+'));
+    for (int i = 0; i < allWords.length; i++) {
+      if (RegExp(r'^[0-9.,]+$').hasMatch(allWords[i])){
+        numberCount ++;
+      }
     }
-    return null;
+    return allWords.length - numberCount;
   }
 
   // Завдання 2
-  // У розкладі рейсів літаків дні тижня позначаються номерами від 1 до 7.
-  // Припустимо, що в програмі дні тижня подаються enum типом Weekd. Написати
-  // програму, що у відповідь на введення номера дня виводить текстове подання
-  // дня тижня.
-  task2(int n) {
-    if (n > 0 && n <= 7) {
-      return Weekd.values[n - 1].toString().split('.').last;
-    } else {
-      return 'Введено некоректне число';
-    }
+  //Написати програму, що зчитує з клавіатури стрічку і повертає кількість чисел
+  task2(String str) {
+    return RegExp(r'\b([0-9]+.[0-9])\b').allMatches(str).length;
   }
 
   // Завдання 3
-  // За понеділком іде вівторок тощо, а за неділею – понеділок. Написати функцію
-  // обчислення за днем тижня (типу Weekd) наступного за ним дня.
-  task3(int n) {
-    return Weekd.values[n % 7].toString().split('.').last;
+  //Написати програму, що зчитує з клавіатури стрічку і повертає стрічку в якій
+  //прибрані усі символи крім літер
+  task3(String str) {
+    return str.replaceAll(RegExp('[^a-zA-Z\\s+]+'), '');
   }
 
   // Завдання 4
-  // Написати &quot;найпростіший калькулятор, що отримує на вхід 2 числа і
-  // операцію над ними після чого повертає результат обчислень.
-  task4(int n, double a, double b) {
-    switch (n) {
-      case 0:
-        return a + b;
-      case 1:
-        return a - b;
-      case 2:
-        return a * b;
-      case 3:
-        return a / b;
-    }
+  // Написати програму, що зчитує з клавіатури стрічку і повертає стрічку в якій
+  // множинні проміжки перетворені в один проміжок
+  task4(String str) {
+    return str.replaceAll(RegExp('\\s{2,}'), ' ');
   }
 
-  String result = '';
 
   // Завдання 5
-  // Написати процедуру обчислення за цілим N>3 таких натуральних A і B,
-  // що 5A-2B=N, причому A+B мінімально.
-  task5(int n) {
-    if (n > 3) {
-      for (int i = 0; i * 5 <= n; i++) {
-        if ((n - (i * (-2))) % (-2) == 0) {
-          result = "A =  $i  B = ${(n - (i * 5)) / (-2)} ";
-          return;
-        }
-      }
-      result = "Рішення немає";
-      return;
-    } else {
-      result = "N<3";
-      return;
-    }
+  // Написати програму, що зчитує з клавіатури стрічку і повертає
+  // стрічку яка містить лише слова, що починаються з великої літери
+  task5(String str) {
+    return str.replaceAll(RegExp(r'\b([^A-Z\s][a-z0-9\s]+)\b'), '');
   }
 }

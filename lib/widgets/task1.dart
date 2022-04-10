@@ -16,6 +16,14 @@ class _Task1State extends State<Task1> {
 
   Tasks tasks = Tasks();
 
+  int task1Result = 0;
+
+  setTask1Result() {
+    setState(() {
+      task1Result = tasks.task1(task1Controller.text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +36,7 @@ class _Task1State extends State<Task1> {
           ),
         ),
         Text(
-          'Введіть одну латинську літеру або цифру',
+          'Введіть стрічку для перевірки кількості слів:',
           style: TextStyle(
             fontSize: 15,
           ),
@@ -38,8 +46,6 @@ class _Task1State extends State<Task1> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: TextFormField(
-              maxLength: 1,
-              validator: (value) => tasks.task1(value),
               controller: task1Controller,
               autocorrect: false,
               cursorColor: const Color(0xff181B19),
@@ -49,7 +55,7 @@ class _Task1State extends State<Task1> {
                 fontSize: 14,
               ),
               decoration: InputDecoration(
-                hintText: 'Введіть символ',
+                hintText: 'str',
                 hintStyle: const TextStyle(
                   color: Color(0xFFA5A5A5),
                   fontWeight: FontWeight.w500,
@@ -70,14 +76,36 @@ class _Task1State extends State<Task1> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Введіть інший символ')),
-              );
-            }
-          },
+          onPressed: setTask1Result,
           child: const Text('Перевірити'),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Результат: ',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            Container(
+              width: 150,
+              decoration: BoxDecoration(
+                color: Color(0xffD6E0FB),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 5,
+                ),
+                child: Text('$task1Result'),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 20,

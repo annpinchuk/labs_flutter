@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lab1/tasks.dart';
 
 class Task4 extends StatefulWidget {
@@ -10,13 +9,21 @@ class Task4 extends StatefulWidget {
 }
 
 class _Task4State extends State<Task4> {
+  final _formKey = GlobalKey<FormState>();
+
   //ініціалізуємо контролери для текстових полів
-  TextEditingController aController = TextEditingController();
-  TextEditingController bController = TextEditingController();
+  TextEditingController task4Controller = TextEditingController();
 
   Tasks tasks = Tasks();
 
-  double task4Result = 0.0;
+  String task4Result = '';
+
+  setTask4Result() {
+    setState(() {
+      task4Result = tasks.task4(task4Controller.text);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,153 +37,51 @@ class _Task4State extends State<Task4> {
           ),
         ),
         Text(
-          'Введіть два числа та оберіть дію: ',
+          'Введіть стрічку:',
           style: TextStyle(
             fontSize: 15,
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: TextFormField(
-                controller: aController,
-                autocorrect: false,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                ],
-                cursorColor: Color(0xff181B19),
-                style: TextStyle(
-                  color: Color(0xff181B19),
+        Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: TextFormField(
+              controller: task4Controller,
+              autocorrect: false,
+              cursorColor: const Color(0xff181B19),
+              style: TextStyle(
+                color: Color(0xff181B19),
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                hintText: 'str',
+                hintStyle: const TextStyle(
+                  color: Color(0xFFA5A5A5),
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                 ),
-                decoration: InputDecoration(
-                  filled: true,
-                  isDense: true,
-                  fillColor: Color(0xffD6E0FB),
-                  contentPadding: EdgeInsets.all(15),
-                  hintText: 'a',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
+                filled: true,
+                fillColor: const Color(0xffF2F3F2),
+                contentPadding: EdgeInsets.only(top: 30, left: 20, right: 20),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              width: 15,
-            ),
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: TextFormField(
-                controller: bController,
-                autocorrect: false,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                ],
-                cursorColor: Color(0xff181B19),
-                style: TextStyle(
-                  color: Color(0xff181B19),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  isDense: true,
-                  fillColor: Color(0xffD6E0FB),
-                  contentPadding: EdgeInsets.all(15),
-                  hintText: 'b',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
+        ),
+        ElevatedButton(
+          onPressed: setTask4Result,
+          child: const Text('Перевірити'),
         ),
         SizedBox(
-          width: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  task4Result = tasks.task4(
-                    0,
-                    double.parse(aController.text),
-                    double.parse(bController.text),
-                  );
-                });
-              },
-              child: const Text('+'),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  task4Result = tasks.task4(
-                    1,
-                    double.parse(aController.text),
-                    double.parse(bController.text),
-                  );
-                });
-              },
-              child: const Text('-'),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  task4Result = tasks.task4(
-                    2,
-                    double.parse(aController.text),
-                    double.parse(bController.text),
-                  );
-                });
-              },
-              child: const Text('*'),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  task4Result = tasks.task4(
-                    3,
-                    double.parse(aController.text),
-                    double.parse(bController.text),
-                  );
-                });
-              },
-              child: const Text('/'),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 15,
+          height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -188,29 +93,23 @@ class _Task4State extends State<Task4> {
               ),
             ),
             Container(
-              width: 200,
+              width: 150,
               decoration: BoxDecoration(
                 color: Color(0xffD6E0FB),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
+                  vertical: 10,
+                  horizontal: 5,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 10,
-                  ),
-                  child: Text('$task4Result'),
-                ),
+                child: Text(task4Result),
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 25,
+          height: 20,
         ),
       ],
     );
